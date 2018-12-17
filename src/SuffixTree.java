@@ -27,6 +27,9 @@ public class SuffixTree {
         Node suffixLink;
 
         Map<Character, Node> children;  //zamiast Node[] children
+
+        //Sluzy do wyznaczenia liczby osiagalnych wierzcholkow reprezentujacych sufikssy dla kazdego wezla
+        // drzewa sufiksowego
         int numberOfLeaves;             //zliczamy liscie
 
         Node(int begin, int end, int depth, int noleaf, Node parent) {
@@ -45,7 +48,6 @@ public class SuffixTree {
     private static Node buildSuffixTree(CharSequence s) {
 
 
-        //return_s(s.toString());
         SuffixTree.s = s;
 
         int n = s.length();
@@ -63,7 +65,6 @@ public class SuffixTree {
             //ustaw ostatni stworzony węzeł wewnętrzny na null przed rozpoczęciem każdej fazy.
             Node last = null;
 
-            //tail - tyle sufiksów musi zostać utworzone.
             while (tail >= 0) {
                 Node ch = node.children.get(ALPHABET.charAt(a[i - tail]));
                 while (ch != null && tail >= ch.end - ch.begin) {
